@@ -1,0 +1,15 @@
+sql_password: abcd
+sql_root_password: abcd
+wp_password: abcd
+sql_database: thedb
+sql_user: droopy
+wp_title: Coconut
+wp_username: droopy
+wp_email: droopy@coconut.io
+country: FR
+state: Idf
+city: Paris
+org: CocoOil
+org_unit: Max
+cert_uid: 1234
+ansible_ssh_private_key_file: "/home/vagrant/playdoh/roles/deploy_user/files/deploy_ed25519"

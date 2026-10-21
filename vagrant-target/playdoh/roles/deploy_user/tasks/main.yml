@@ -1,0 +1,60 @@
+- name: "Create locally files directory"
+  file:
+    path: "{{ role_path }}/files"
+    state: "directory"
+    owner: "vagrant"
+    group: "vagrant"
+  connection: local
+  run_once: true
+
+- name: "Check locally if shh key exists"
+  ansible.builtin.stat:
+    path: "{{ role_path }}/files/deploy_ed25519"
+  register: ssh_key_check
+  connection: local
+  run_once: true
+
+- name: "Create locally shh keys"
+  command: ssh-keygen -q -t ed25519 -f {{ role_path }}/files/deploy_ed25519 -C "deploy" -N ""
+  become: true
+  become_user: "vagrant"
+  connection: local
+  run_once: true
+  when: not ssh_key_check.stat.exists
+
+- name: "Create User"
+  ansible.builtin.user:
+    name: deploy
+    comment: ansible deploy
+    create_home: yes
+    shell: /bin/bash
+    groups: sudo,docker
+    append: true
+    password: "!"
+
+- name: "Add user to sudoers file"
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: "deploy ALL=(ALL:ALL) NOPASSWD: ALL"
+
+- name: "Create .ssh directory"
+  file:
+    path: /home/deploy/.ssh
+    owner: "deploy"
+    group: "deploy"
+    mode: "0700"
+    state: "directory"
+
+- name: "Copy public key as authorized_keys"
+  copy:
+    src: deploy_ed25519.pub
+    dest: /home/deploy/.ssh/authorized_keys
+    owner: deploy
+    group: deploy
+    mode: "0600"
+
+#- name: "Add user to group docker"
+#  ansible.builtin.user:
+#    name: deploy
+#    groups: docker
+#    append: yes

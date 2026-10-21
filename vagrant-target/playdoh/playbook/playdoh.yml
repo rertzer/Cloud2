@@ -1,0 +1,27 @@
+- name: Deploy Inception
+  hosts: all
+  become: true
+  tasks:
+    - name: "Firewall installation"
+      include_role:
+        name: "firewall"
+
+    - name: "Install docker"
+      include_role:
+        name: "install_docker"
+
+    - name: "Deploy user"
+      include_role:
+        name: "deploy_user"
+
+    - name: "Install inception"
+      include_role:
+        name: "install_inception"
+      vars:
+        ansible_user: "deploy"
+
+    - name: "Deploy inception"
+      include_role:
+        name: "deploy_inception"
+      vars:
+        ansible_user: "deploy"

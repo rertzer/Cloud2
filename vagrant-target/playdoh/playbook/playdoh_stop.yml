@@ -1,0 +1,9 @@
+- name: Stop Inception
+  hosts: all
+  become: true
+  tasks:
+    - name: "Stop inception"
+      include_role:
+        name: "stop_inception"
+      vars:
+        ansible_user: "deploy"

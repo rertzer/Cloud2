@@ -1,0 +1,9 @@
+- name: Clean Inception
+  hosts: all
+  become: true
+  tasks:
+    - name: "Down inception"
+      include_role:
+        name: "down_inception"
+      vars:
+        ansible_user: "deploy"

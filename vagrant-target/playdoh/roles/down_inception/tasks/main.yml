@@ -1,0 +1,17 @@
+- name: "Docker Compose Down"
+  community.docker.docker_compose_v2:
+    project_src: /var/inception/srcs
+    state: absent
+    remove_images: "all"
+    remove_orphans: true
+    remove_volumes: true
+
+- name: "Delete mariadb directory"
+  file:
+    path: /var/data/mariadb
+    state: absent
+
+- name: "Delete wordpress directory"
+  file:
+    path: /var/data/wordpress
+    state: absent
