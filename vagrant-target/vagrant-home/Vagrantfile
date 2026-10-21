@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
   end
 
   # Ansible Server
+  ssh_key_path = ENV["PLAYDOH_KEY"]
   config.vm.define "playdoh" do |playdoh|
     playdoh.vm.hostname = "playdoh"
     playdoh.vm.network "private_network", ip: "192.168.56.110"
@@ -14,29 +15,31 @@ Vagrant.configure("2") do |config|
 	playdoh.vm.provision "shell", path: "tools/ubuntu_server_install.sh"
     playdoh.vm.provision "shell", path: "tools/ansible_server_install.sh" 
 	playdoh.vm.provision "file", source: "../playdoh", destination: "/home/vagrant/playdoh"
-	playdoh.vm.provision "file", source: "files/cloud_ed25519", destination: "/home/vagrant/.ssh/cloud_ed25519"
+	playdoh.vm.provision "file", source: ssh_key_path, destination: "/home/vagrant/.ssh/cloud_ed25519"
 	playdoh.vm.provision "file", source: "files/ansible.cfg", destination: "/home/vagrant/.ansible.cfg"
 	playdoh.vm.provision "shell", inline: "chmod 600 /home/vagrant/.ssh/cloud_ed25519"
 	playdoh.vm.provision "shell", path: "tools/pswd_generator.sh"
   end
 
   # Server Worker
-=begin   config.vm.define "pixie" do |pixie|
+=begin begin   config.vm.define "pixie" do |pixie|
 	  pixie.vm.hostname = "pixie"
 	  pixie.vm.network "private_network", ip: "192.168.56.111"
 	  pixie.vm.provision "file", source: "files/01-netcfg.yaml", destination: "01-netcfg.yaml"
 	  pixie.vm.provision "shell", path: "tools/ubuntu_server_install.sh"
 	  pixie.vm.provision "file", source: "files/cloud_ed25519.pub", destination:"/home/vagrant/.ssh/cloud_ed25519.pub"
 	  pixie.vm.provision "shell", inline: "cat /home/vagrant/.ssh/cloud_ed25519.pub >> /home/vagrant/.ssh/authorized_keys"
-  end =end
+  end
+=end
 
   # Server Worker 2
-=begin   config.vm.define "pete" do |pete|
+=begin begin   config.vm.define "pete" do |pete|
 	  pete.vm.hostname = "pete"
 	  pete.vm.network "private_network", ip: "192.168.56.112"
 	  pete.vm.provision "file", source: "files/01-netcfg.yaml", destination: "01-netcfg.yaml"
 	  pete.vm.provision "shell", path: "tools/ubuntu_server_install.sh"
 	  pete.vm.provision "file", source: "files/cloud_ed25519.pub", destination:"/home/vagrant/.ssh/cloud_ed25519.pub"
 	  pete.vm.provision "shell", inline: "cat /home/vagrant/.ssh/cloud_ed25519.pub >> /home/vagrant/.ssh/authorized_keys"
-  end =end
+  end
+=end
 end

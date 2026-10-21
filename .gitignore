@@ -12,4 +12,4 @@ private_key
 inception/srcs/certificate/maria_ssl/*
 .vagrant
 cloud.inv
-
+ansible.cfg

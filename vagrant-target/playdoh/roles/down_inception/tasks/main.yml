@@ -15,3 +15,9 @@
   file:
     path: /var/data/wordpress
     state: absent
+
+- name: "Remove deploy user"
+  user:
+    name: deploy
+    remove: yes
+    state: absent

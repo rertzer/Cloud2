@@ -13,7 +13,7 @@ ssh-keygen -t ed25519 -f vagrant-target/vagrant-home/files/cloud_ed25519
 2. Start Vagrant
 
 ```sh
-cd vagrant-target/vagrant-target
+cd vagrant-target/vagrant-home
 vagrant up
 ```
 
