@@ -1,7 +1,7 @@
-FROM debian:trixie
+FROM debian:trixie-slim
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y \
+    apt-get install -no-install-recommends -y \
         wget \
         curl \
         php8.4 \

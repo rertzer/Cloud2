@@ -11,6 +11,7 @@ services:
         condition: service_healthy
     env_file:
       - .env
+    pull_policy: never
     build:
       context: ./requirements/nginx/
       args:
@@ -23,11 +24,12 @@ services:
         CERT_UID: ${CERT_UID}
     ports:
       - "443:443"
-    restart: on-failure
+    restart: unless-stopped
 
   inc_wordpress:
     container_name: inc_wordpress
     image: inc_wordpress
+    pull_policy: never
     build: ./requirements/wordpress/
     env_file: .env
     volumes:
@@ -40,7 +42,7 @@ services:
       - inc_redis
     expose:
       - "9000"
-    restart: on-failure
+    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pgrep php-fpm >/dev/null"]
       interval: 4s
@@ -51,6 +53,7 @@ services:
   inc_mariadb:
     container_name: inc_mariadb
     image: inc_mariadb
+    pull_policy: never
     build:
       context: ./requirements/mariadb/
       args:
@@ -70,7 +73,7 @@ services:
       - inception
     expose:
       - "3306"
-    restart: on-failure
+    restart: unless-stopped
 
   inc_php_myadmin:
     container_name: inc_phpmyadmin
@@ -89,17 +92,18 @@ services:
       - inception
     expose:
       - "80"
-    restart: on-failure
+    restart: unless-stopped
 
   inc_redis:
     container_name: inc_redis
     image: inc_redis
+    pull_policy: never
     build: ./requirements/redis/
     networks:
       - inception
     expose:
       - "6379"
-    restart: on-failure
+    restart: unless-stopped
 
 volumes:
   wordpress:

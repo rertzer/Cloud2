@@ -5,5 +5,3 @@
     - name: "Down inception"
       include_role:
         name: "down_inception"
-      vars:
-        ansible_user: "deploy"

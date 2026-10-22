@@ -22,7 +22,7 @@ vagrant up
 ```sh
 vagrant ssh playdoh
 cd playdoh/
-ansible-playbook playbook/playdoh.yml --vault-password-file roles/install_inception/files/vault.key
+ansible-playbook playbook/playdoh.yml --ask-vault-pass
 ```
 
 4. Enjoy the Coconuts

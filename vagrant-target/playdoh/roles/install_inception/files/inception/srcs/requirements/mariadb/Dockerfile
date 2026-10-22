@@ -1,4 +1,4 @@
-FROM	debian:trixie
+FROM	debian:trixie-slim
 
 ARG DOMAIN_NAME
 ARG CERT_UID
@@ -9,7 +9,7 @@ ARG ORG
 ARG ORG_UNIT
 ARG MARIA_DNS
 
-RUN	apt-get update && apt-get upgrade -y && apt-get install mariadb-server openssl -y
+RUN	apt-get update && apt-get upgrade -y && apt-get install -no-install-recommends mariadb-server openssl -y
 RUN groupmod -g 1001 mysql && usermod -u 1001 mysql
 RUN chown -R mysql:mysql /var/lib/mysql
 

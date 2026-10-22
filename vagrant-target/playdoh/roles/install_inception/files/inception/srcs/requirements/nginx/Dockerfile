@@ -1,7 +1,7 @@
-FROM debian:trixie
+FROM debian:trixie-slim
 
 # downloads
-RUN apt-get update && apt-get upgrade -y && apt-get install \
+RUN apt-get update && apt-get upgrade -y && apt-get install -no-install-recommends \
 	nginx openssl vim curl -y
 
 # nginx certifcate
