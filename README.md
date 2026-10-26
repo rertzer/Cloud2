@@ -22,11 +22,31 @@ PLAYDOH_KEY="/path/to/ssh/key/" vagrant up
 ```sh
 vagrant ssh playdoh
 cd playdoh/
-ansible-playbook playbook/playdoh.yml --ask-vault-pass --limit mytargets
+ansible-playbook playbook/playdoh.yml --ask-vault-pass --limit <mytargets>
 ```
 
 4. Enjoy the Coconuts
 
 ```
-https://192.168.56.111
+https://dohdoh.duckdns.org
+```
+
+## Start, Stop, Clean
+
+### Restart the Server
+
+```sh
+ansible-playbook playbook/playdoh_up.yml --ask-vault-pass --limit <mytargets>
+```
+
+### Stop the Server
+
+```sh
+ansible-playbook playbook/playdoh_stop.yml --ask-vault-pass --limit <mytargets>
+```
+
+### Clean the Server
+
+```sh
+ansible-playbook playbook/playdoh_clean.yml --ask-vault-pass --limit <mytargets>
 ```
