@@ -7,13 +7,13 @@ Deploying a WordPress Website to the Cloud Using Ansible
 1. Create SSH keys
 
 ```sh
-ssh-keygen -t ed25519 -f vagrant-target/vagrant-home/files/cloud_ed25519
+ssh-keygen -t ed25519 -f resources/vagrant-home/files/cloud_ed25519
 ```
 
 2. Start Vagrant
 
 ```sh
-cd vagrant-target/vagrant-home
+cd resources/vagrant-home
 PLAYDOH_KEY="/path/to/ssh/key/" vagrant up
 ```
 

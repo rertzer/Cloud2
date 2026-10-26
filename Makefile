@@ -1,4 +1,4 @@
-VAGRANT_DIR := vagrant-target/vagrant-home
+VAGRANT_DIR := resources/vagrant-home
 VAGRANT_KEY := $(VAGRANT_DIR)/files/cloud_ed25519
 VAGRANT_PUB := $(VAGRANT_KEY).pub
 
