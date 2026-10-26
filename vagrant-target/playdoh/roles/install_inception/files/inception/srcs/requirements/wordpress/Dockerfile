@@ -3,7 +3,6 @@ FROM debian:trixie-slim
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y -no-install-recommends \
         wget \
-        curl \
         php8.4 \
         php8.4-fpm \
         php8.4-mysql \
@@ -28,13 +27,15 @@ RUN chmod 755 /usr/local/bin/wp_conf.sh
 
 RUN mkdir -p /run/php 
 
-RUN wget https://wordpress.org/wordpress-7.0.3.tar.gz -P /var/www/html
-RUN cd /var/www/html && tar -xzf wordpress-7.0.3.tar.gz && rm wordpress-7.0.3.tar.gz
+RUN wget https://wordpress.org/wordpress-7.1.3.tar.gz -P /var/www/html
+RUN cd /var/www/html && tar -xzf wordpress-7.1.3.tar.gz && rm wordpress-7.1.3.tar.gz
 
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
+
+RUN apt remove wget
 
 WORKDIR /var/www/html/wordpress
 

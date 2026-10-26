@@ -2,7 +2,7 @@ FROM debian:trixie-slim
 
 # downloads
 RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
-	nginx openssl vim curl
+	nginx openssl   && rm -rf /var/lib/apt/lists/*
 
 # nginx certifcate
 ARG DOMAIN_NAME

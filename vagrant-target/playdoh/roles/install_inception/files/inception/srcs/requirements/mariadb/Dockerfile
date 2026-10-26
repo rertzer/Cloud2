@@ -9,7 +9,7 @@ ARG ORG
 ARG ORG_UNIT
 ARG MARIA_DNS
 
-RUN	apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends mariadb-server openssl
+RUN	apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends mariadb-server openssl   && rm -rf /var/lib/apt/lists/*
 RUN groupmod -g 1001 mysql && usermod -u 1001 mysql
 RUN chown -R mysql:mysql /var/lib/mysql
 
