@@ -1,7 +1,7 @@
 FROM debian:trixie-slim
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y -no-install-recommends \
+    apt-get install -y --no-install-recommends \
         wget \
         php8.4 \
         php8.4-fpm \
