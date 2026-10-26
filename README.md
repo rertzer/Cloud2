@@ -14,7 +14,7 @@ ssh-keygen -t ed25519 -f vagrant-target/vagrant-home/files/cloud_ed25519
 
 ```sh
 cd vagrant-target/vagrant-home
-vagrant up
+PLAYDOH_KEY="/path/to/ssh/key/" vagrant up
 ```
 
 3. Enter the `playdoh` machine & run Ansible
@@ -22,7 +22,7 @@ vagrant up
 ```sh
 vagrant ssh playdoh
 cd playdoh/
-ansible-playbook playbook/playdoh.yml --ask-vault-pass
+ansible-playbook playbook/playdoh.yml --ask-vault-pass --limit mytargets
 ```
 
 4. Enjoy the Coconuts
